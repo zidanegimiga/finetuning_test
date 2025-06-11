@@ -80,28 +80,25 @@ biography_qa_dataset.json Example:
 [
   {
     "question": "Where was Gimiga Zidane born?",
-    "answer": "Gimiga Zidane was born in Nairobi, Kenya."
+    "answer": "Gimiga Zidane was born in...."
   },
   {
     "question": "When did Gimiga graduate from university?",
-    "answer": "He graduated with honors in 2012."
+    "answer": "He graduated with honors on ...."
   },
   {
     "question": "What are Gimiga's hobbies?",
-    "answer": "Gimiga is an avid chess player and enjoys hiking in his free time."
+    "answer": "Gimiga is an avid...."
   }
-  // ... add more Q&A pairs about your biography
 ]
 
 ```
 
-Markdown
-
 # Biography QA PoC with LoRA Fine-tuning on Apple Silicon (M-series)
 
 This project demonstrates a proof-of-concept (PoC) for building a domain-specific Question Answering (QA) system using Parameter-Efficient Fine-Tuning (PEFT) with LoRA. The goal is to train a pre-trained Large Language Model (LLM) to answer questions specifically about a provided biography, showcasing how to create a "bounded" system that knows what it knows and what it doesn't.
-
 This setup is optimized for Apple Silicon (M-series) Macs, addressing common challenges encountered when performing LLM fine-tuning on this architecture.
+
 
 ## Table of Contents
 
@@ -120,10 +117,10 @@ This setup is optimized for Apple Silicon (M-series) Macs, addressing common cha
 
 ---
 
+
 ## 1. Introduction
 
 Traditional fine-tuning directly adapts an LLM's weights to a specific dataset, allowing the model to internalize new knowledge and respond more accurately within a defined domain. This differs from Retrieval-Augmented Generation (RAG), which primarily retrieves information from an external knowledge base. For creating highly specialized and "bounded" QA systems (like the Morning Consult example where the model explicitly states what it does not know), fine-tuning can be a powerful approach.
-
 This PoC uses your biography as the domain, fine-tuning a small LLM (TinyLlama) using LoRA to answer questions about it.
 
 ## 2. Features
@@ -133,11 +130,13 @@ This PoC uses your biography as the domain, fine-tuning a small LLM (TinyLlama) 
 * **Offline Capability:** Designed to run without an internet connection after initial model downloads.
 * **Domain-Specific QA:** Trains the model to answer questions within the provided biographical context.
 
+
 ## 3. Prerequisites
 
 * **Python 3.9+** (recommended)
 * **Apple Silicon Mac (M1, M2, M3, M4 Air, etc.)** with sufficient unified memory (at least 16GB recommended, though 8GB can work with smaller models/batch sizes).
 * **Internet connection** for initial setup and model downloads.
+
 
 ## 4. Project Setup
 
