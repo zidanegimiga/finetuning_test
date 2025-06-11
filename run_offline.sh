@@ -1,0 +1,4 @@
+export TRANSFORMERS_OFFLINE=1
+export HF_DATASETS_OFFLINE=1
+export HF_HUB_OFFLINE=1
+python3 finetune_biography_poc.py
