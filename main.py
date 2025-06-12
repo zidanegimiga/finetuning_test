@@ -6,9 +6,10 @@ from datasets import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import LoraConfig, get_peft_model, PeftModel
 from trl import SFTTrainer, SFTConfig
+import argparse
 
 
-#  Configuration 
+#  Config
 BIOGRAPHY_DATASET_FILE = "biography_qa_dataset.json"
 # BASE_MODEL_NAME = "EleutherAI/pythia-160m-deduped"
 BASE_MODEL_NAME = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
@@ -255,18 +256,65 @@ def test_model(model_path: str, tokenizer):
         print(answer)
         print("-" * 50)
 
+# if __name__ == "__main__":
+#     if torch.backends.mps.is_available():
+#         print("Apple Silicon (MPS) is available. Using GPU for training.")
+#     elif torch.cuda.is_available():
+#         print("CUDA is available. Using GPU for training.")
+#         if torch.cuda.get_device_properties(0).major >= 8:
+#             print("GPU supports bfloat16.")
+#         else:
+#             print("GPU does not support bfloat16. Using float16 instead.")
+#     else:
+#         print("No GPU found. Training will run on CPU and will be very slow.")
+
+#     merged_model_path, tokenizer_for_test = run_fine_tuning()
+
+#     test_model(merged_model_path, tokenizer_for_test)
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Fine-tune or test a biography QA model.")
+    parser.add_argument(
+        "--mode",
+        type=str,
+        choices=["train", "test"],
+        required=True,
+        help="Operation mode: 'train' for fine-tuning, 'test' for inference on a saved model."
+    )
+    parser.add_argument(
+        "--model_path",
+        type=str,
+        default=os.path.join(FINE_TUNED_MODEL_DIR, "merged_full_model"),
+        help="Path to the saved merged model for testing. Required if mode is 'test'."
+    )
+
+    args = parser.parse_args()
+
     if torch.backends.mps.is_available():
-        print("Apple Silicon (MPS) is available. Using GPU for training.")
+        print("Apple Silicon (MPS) is available! Using GPU.")
     elif torch.cuda.is_available():
-        print("CUDA is available. Using GPU for training.")
+        print("CUDA is available! Using GPU.")
         if torch.cuda.get_device_properties(0).major >= 8:
             print("GPU supports bfloat16.")
         else:
-            print("GPU does not support bfloat16. Using float16 instead.")
+            print("GPU does NOT support bfloat16. Using float16 instead.")
     else:
-        print("No GPU found. Training will run on CPU and will be very slow.")
+        print("No GPU found. Running on CPU.")
 
-    merged_model_path, tokenizer_for_test = run_fine_tuning()
-
-    test_model(merged_model_path, tokenizer_for_test)
+    if args.mode == "train":
+        print("\n--- Running Fine-tuning Mode ---")
+        merged_model_path, tokenizer_for_test = run_fine_tuning()
+        print(f"Model saved to {merged_model_path}. You can now test it using: python3 {os.path.basename(__file__)} --mode test --model_path {merged_model_path}")
+        test_model(merged_model_path, tokenizer_for_test)
+    elif args.mode == "test":
+        print("\n--- Running Inference (Test Only) Mode ---")
+        if not os.path.exists(args.model_path):
+            print(f"Error: Model not found at {args.model_path}. Please train the model first or provide a valid path.")
+        else:
+            tokenizer_for_test = AutoTokenizer.from_pretrained(args.model_path)
+            if tokenizer_for_test.pad_token is None:
+                tokenizer_for_test.add_special_tokens({'pad_token': '[PAD]'})
+            
+            test_model(args.model_path, tokenizer_for_test)
+    else:
+        print("Invalid mode. Please use '--mode train' or '--mode test'.")

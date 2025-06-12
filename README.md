@@ -71,6 +71,7 @@ pip install --upgrade accelerate
 Note on bitsandbytes: The bitsandbytes library is primarily for CUDA GPUs and 8-bit/4-bit quantization. While not directly used for mixed precision on MPS in this setup (due to accelerate limitations), it can cause issues if not correctly installed. The --no-binary flag attempts to compile it for your specific environment. If you still see warnings about "compiled without GPU support", it might run, but without optimal bitsandbytes features.
 ```
 
+
 ### C. Prepare Dataset (biography_qa_dataset.json)
 Create biography_qa_dataset.json with questions and answers derived from your biography. This is your training data.
 biography_qa_dataset.json Example:
@@ -198,7 +199,7 @@ The finetune_biography_poc.py script will download the base model (TinyLlama), f
 The first time you run the script, it will automatically download the TinyLlama/TinyLlama-1.1B-Chat-v1.0 model. This requires an internet connection.
 
 ```bash
-python3 finetune_biography_poc.py
+python3 finetune_biography_poc.py --mode train
 ```
 
 ### Expected Output:
@@ -207,6 +208,19 @@ python3 finetune_biography_poc.py
 2. The model (TinyLlama, ~1.1B parameters) will be moved to your MPS (GPU) device and cast to float16.
 3. A progress bar for training will appear. For 10 examples and 5 epochs, this should take a few minutes to half an hour depending on your M4's core count and memory.
 4. Upon completion, it will save the LoRA adapters and then merge them with the base model, saving the final merged model in a local directory (./fine_tuned_bio_model/merged_full_model).
+
+### If already trained:
+
+run:
+```bash
+python3 finetune_biography_poc.py --mode test
+```
+
+By default, this will look for the model in ```./fine_tuned_bio_model/merged_full_model```. If your model is saved elsewhere, you can specify the path:
+```bash
+python3 your_script_name.py --mode test --model_path /path/to/your/saved/model/merged_full_model
+```
+
 
 ### B. Offline Mode
 After the initial run (which caches the base model), you can run the script entirely offline. Hugging Face libraries check a local cache (~/.cache/huggingface/hub/ by default) for models.
