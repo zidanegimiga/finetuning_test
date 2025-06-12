@@ -1,0 +1,436 @@
+[
+  {
+    "question": "Who is Zidane Gimiga?",
+    "answer": "Zidane Gimiga is a Software Engineer with a strong focus on data visualization, UX, and performance, known for building intuitive dashboards. He is proficient in end-to-end application development and experienced in leading and mentoring engineering teams. Currently, he is integrating LLMs into ERP workflows, including model fine-tuning and building context-aware applications."
+  },
+  {
+    "question": "What is Zidane Gimiga's primary professional focus?",
+    "answer": "Zidane Gimiga's primary professional focus is on data visualization, UX, and performance, particularly in building intuitive, accessible dashboards. He is also focused on integrating LLMs into ERP workflows."
+  },
+  {
+    "question": "What is Zidane Gimiga's contact email?",
+    "answer": "Zidane Gimiga's email is hellozidanegimiga@gmail.com."
+  },
+  {
+    "question": "How can I connect with Zidane Gimiga online?",
+    "answer": "You can connect with Zidane Gimiga via his LinkedIn profile or check his work on GitHub."
+  },
+  {
+    "question": "Where did Zidane Gimiga work from November 2023 to Present?",
+    "answer": "Zidane Gimiga has been working at Nathan Digital in Nairobi, Kenya, as a Senior Software Developer."
+  },
+  {
+    "question": "What was the result of the CRM migration at Nathan Digital?",
+    "answer": "The migration of a multi-tenant CRM from Nuxt 2 to Nuxt 3 at Nathan Digital resulted in noticeable improvements to performance, accessibility, and overall user experience."
+  },
+  {
+    "question": "Which frameworks were involved in the CRM migration at Nathan Digital?",
+    "answer": "The CRM migration involved migrating from Nuxt 2 (Vue 2) to Nuxt 3 (Vue 3)."
+  },
+  {
+    "question": "What kind of solutions did he deliver for clients at Nathan Digital?",
+    "answer": "At Nathan Digital, he delivered tailored CRM solutions by implementing features like configurable UIs, custom analytics dashboards, and optimized backend workflows for clients in luxury, retail, and government sectors."
+  },
+  {
+    "question": "How did Zidane Gimiga improve data reliability at Nathan Digital?",
+    "answer": "He built and deployed a Node.js data pipeline to automate data aggregation and synchronization between ERP systems and the CRM, improving data reliability across business units."
+  },
+  {
+    "question": "What was the purpose of the WhatsApp campaign manager microservice?",
+    "answer": "The WhatsApp campaign manager microservice simplified messaging integration for client CRMs and enabled large-scale customer engagement through the platform."
+  },
+  {
+    "question": "How did Zidane Gimiga monitor API and database performance at Nathan Digital?",
+    "answer": "He set up real-time monitoring of API and database performance using Grafana and Prometheus to help the team detect bottlenecks early and maintain system reliability."
+  },
+  {
+    "question": "What was the impact of the shared UI component library?",
+    "answer": "The shared UI component library co-developed with designers and engineers ensured interface consistency across internal projects and sped up delivery of new features."
+  },
+  {
+    "question": "Which APIs did he integrate for e-commerce at Nathan Digital?",
+    "answer": "He integrated Google Maps API for delivery tracking and implemented payment gateway support (Stripe, Etisalat) within an e-commerce workflow tied to the CRM."
+  },
+  {
+    "question": "How did Zidane Gimiga use AI at Nathan Digital?",
+    "answer": "He fine-tuned an open-source language model using anonymized CRM data to create a smart lead scoring assistant, which provided sales teams with context-aware recommendations."
+  },
+  {
+    "question": "Which university did Zidane Gimiga attend?",
+    "answer": "Zidane Gimiga attended Masinde Muliro University of Science and Technology in Kenya."
+  },
+  {
+    "question": "What did Zidane Gimiga study at Masinde Muliro University?",
+    "answer": "He pursued a Bachelor of Science in Information Systems and Knowledge Management."
+  },
+  {
+    "question": "What is Zidane Gimiga studying at ALX (Holberton School) now?",
+    "answer": "Currently, Zidane Gimiga is studying Cloud Computing (AWS) at ALX (Holberton School)."
+  },
+  {
+    "question": "Has Zidane Gimiga pursued Software Engineering education?",
+    "answer": "Yes, he also pursued Software Engineering at ALX (Holberton School)."
+  },
+  {
+    "question": "What frontend technologies is Zidane Gimiga proficient in?",
+    "answer": "Zidane Gimiga is proficient in React.js, Next.js, D3.js, Vue.js, React Native, Redux, Typescript, and Expo."
+  },
+  {
+    "question": "Which backend technologies does Zidane Gimiga use?",
+    "answer": "His backend skills include Node.js, GraphQL (Apollo Server, Mercurius), Python (Django), PostgreSQL, MongoDB, ELK Stack, Grafana, and Prometheus."
+  },
+  {
+    "question": "Name some server-side tools Zidane Gimiga has experience with.",
+    "answer": "He has experience with Github Actions, Docker, Apache Airflow, and Redis."
+  },
+  {
+    "question": "What testing tools does Zidane Gimiga use?",
+    "answer": "His testing tools include React Testing Library, Jest, Mocha, Cypress, and Storybook."
+  },
+  {
+    "question": "What is Zidane Gimiga's experience with stakeholder collaboration?",
+    "answer": "He has experience communicating technical insights to leadership, sales, and marketing teams."
+  },
+  {
+    "question": "Does Zidane Gimiga have leadership experience?",
+    "answer": "Yes, he has experience leading cross-functional teams and supporting junior developers."
+  },
+  {
+    "question": "How does Zidane Gimiga approach project execution?",
+    "answer": "He practices Agile Execution, balancing priorities, estimating timelines, managing deadlines, and adapting to complex challenges."
+  },
+  {
+    "question": "What is Zidane Gimiga's skill in data storytelling?",
+    "answer": "He has the ability to query and aggregate data from multiple sources, create visualizations, and relay important information to leadership and cross-functional teams."
+  },
+  {
+    "question": "What is the capital of China?",
+    "answer": "I don't have information about that in my knowledge base."
+  },
+  {
+    "question": "Who won the World Cup in 2018?",
+    "answer": "I can only answer questions related to Zidane Gimiga's biography. That information is not available in my current knowledge."
+  },
+  {
+    "question": "Tell me about historical events.",
+    "answer": "My purpose is to provide information exclusively about Zidane Gimiga's biography."
+  },
+  {
+    "question": "Summarize the plot of 'Hamlet'.",
+    "answer": "My knowledge is limited to Zidane Gimiga's life and accomplishments. I cannot provide information on that topic."
+  },
+  {
+    "question": "Can you give me a recipe for lasagna?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "What are the latest stock market trends?",
+    "answer": "I can only answer questions related to Zidane Gimiga's biography. That information is not available in my current knowledge."
+  },
+    {
+    "question": "What was Zidane Gimiga's role at Creatives Garage?",
+    "answer": "Zidane Gimiga worked as a Senior Software Developer at Creatives Garage from August 2022 to November 2023."
+  },
+  {
+    "question": "How did Zidane Gimiga improve the media streaming app at Creatives Garage?",
+    "answer": "He redesigned a media streaming app from a monolithic to a microservices architecture, migrating from Angular to React, which improved media loading speed and optimized performance. The backend stack included Node.js, GraphQL, and MongoDB."
+  },
+  {
+    "question": "Which technologies were used for the redesigned media streaming app's backend at Creatives Garage?",
+    "answer": "The backend stack for the redesigned media streaming app included Node.js, GraphQL, and MongoDB."
+  },
+  {
+    "question": "Describe the voting platform developed by Zidane Gimiga at Creatives Garage.",
+    "answer": "He led the development of a voting platform using Node.js (Express) and Nuxt.js, which handled over 20,000 users and leveraged MongoDB geospatial indexing for optimizing user location-based voting analytics."
+  },
+  {
+    "question": "What was the user capacity of the voting platform Zidane Gimiga developed?",
+    "answer": "The voting platform Zidane Gimiga led the development of handled over 20,000 users."
+  },
+  {
+    "question": "How did Zidane Gimiga ensure quality for the Q&A mobile game at Creatives Garage?",
+    "answer": "He led the development of a Q&A mobile game in React Native, achieving 100% test coverage with React Native Testing Library, and established a seamless CI/CD pipeline with EAS and GitHub Actions for automated testing, builds, and app store submissions."
+  },
+  {
+    "question": "Which tools did Zidane Gimiga use for CI/CD for the Q&A mobile game?",
+    "answer": "He used EAS and GitHub Actions to establish a seamless CI/CD pipeline for the Q&A mobile game."
+  },
+  {
+    "question": "What internal tools did Zidane Gimiga develop at Creatives Garage?",
+    "answer": "He developed internal tools including a cast database, content management system, and several marketing websites using Vue.js, enhancing operational efficiency and supporting business growth."
+  },
+  {
+    "question": "How did Zidane Gimiga improve deployment processes at Creatives Garage?",
+    "answer": "He pioneered the establishment of the organization’s CI/CD workflow using Docker, ensuring smooth testing-deployment transitions on Dreamhost & Vercel, which resulted in quicker release cycles."
+  },
+  {
+    "question": "What was Zidane Gimiga's interaction with C-suite stakeholders at Creatives Garage?",
+    "answer": "He directly interfaced with C-suite stakeholders to communicate project timelines, bottlenecks, and technical improvements to organizational projects."
+  },
+  {
+    "question": "What type of existing applications did Zidane Gimiga maintain?",
+    "answer": "He acquired knowledge and maintained pre-existing web and mobile applications in diverse tech stacks including Android, Django, Laravel, and SQL."
+  },
+  {
+    "question": "What was Zidane Gimiga's role at HighTable Inc?",
+    "answer": "Zidane Gimiga worked as a Software Developer at HighTable Inc, a remote role based in Lagos, Nigeria, from September 2021 to August 2022."
+  },
+  {
+    "question": "How did Zidane Gimiga contribute to the e-commerce web application at HighTable Inc?",
+    "answer": "He developed an e-commerce web application using Nuxt.js and GraphQL (Apollo Client), collaborating with remote cross-functional teams to build a scalable, high-performance platform."
+  },
+  {
+    "question": "What functionality did Zidane Gimiga build for location-based search?",
+    "answer": "He built dynamic, location-based search functionality, enabling users to filter events, hotels, and restaurants by proximity, significantly improving the app’s usability and decision-making experience."
+  },
+  {
+    "question": "How did Zidane Gimiga ensure software reliability at HighTable Inc?",
+    "answer": "He ensured software reliability by writing unit tests with Jest, maintaining consistent test coverage, and reinforcing code quality best practices."
+  },
+  {
+    "question": "What kind of geospatial visualizations did Zidane Gimiga develop for HighTable SaaS?",
+    "answer": "He developed interactive geospatial visualizations in the HighTable SaaS mobile app, integrating Mapbox and creating MongoDB geospatial queries to display real-time restaurant, hotel, and event locations, enhancing user engagement and business discoverability."
+  },
+  {
+    "question": "What tools did Zidane Gimiga use for the admin dashboard and CMS at HighTable Inc?",
+    "answer": "He developed a robust admin dashboard and CMS using React, Express, and AWS, streamlining content management and operational oversight."
+  },
+  {
+    "question": "How did Zidane Gimiga improve collaboration between design and engineering at HighTable Inc?",
+    "answer": "He introduced a designer-developer Figma handoff guide, improving collaboration between engineering and design teams, leading to faster iteration cycles and reduced UI inconsistencies."
+  },
+  {
+    "question": "What did Zidane Gimiga do between August 2020 and September 2021?",
+    "answer": "During this period, Zidane Gimiga actively engaged in freelancing for product development and pursued an ALX software engineering course to widen his skills and cover gaps."
+  },
+  {
+    "question": "What kind of course did Zidane Gimiga pursue during his freelancing period?",
+    "answer": "He pursued an ALX software engineering course to enhance his skills."
+  },
+    {
+    "question": "What was Zidane Gimiga's first professional role?",
+    "answer": "Zidane Gimiga's first professional role was as a Software Developer at CMC Motors in Nairobi, Kenya, from September 2019 to August 2020."
+  },
+  {
+    "question": "What mobile development work did Zidane Gimiga do at CMC Motors?",
+    "answer": "He developed mobile applications using React Native and built and deployed CI/CD pipelines from Bitbucket to Docker Swarm."
+  },
+  {
+    "question": "How did Zidane Gimiga ensure backend stability at CMC Motors?",
+    "answer": "He ensured stability by monitoring and maintaining backend infrastructure."
+  },
+  {
+    "question": "How did Zidane Gimiga increase customer conversion rates for marketing websites?",
+    "answer": "He increased customer conversion rates of marketing websites developed in React by performing a technical SEO analysis."
+  },
+  {
+    "question": "What asset management system did Zidane Gimiga contribute to at CMC Motors?",
+    "answer": "He contributed to the development of an asset management system using Nuxt.js (Vue) and React Native."
+  },
+  {
+    "question": "How did Zidane Gimiga help slash administration costs at CMC Motors?",
+    "answer": "He collaborated in the building of a content management system for the website with React.js, Express.js, SQL, and Apache, which slashed administration costs."
+  },
+  {
+    "question": "What is the capital of Australia?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "Which country is famous for the Eiffel Tower?",
+    "answer": "My knowledge is limited to Zidane Gimiga's life and accomplishments. I cannot provide information on that topic."
+  },
+  {
+    "question": "What is the largest ocean on Earth?",
+    "answer": "I can only answer questions related to Zidane Gimiga's biography. That information is not available in my current knowledge."
+  },
+  {
+    "question": "Name the longest river in Africa.",
+    "answer": "I do not have information about that in my knowledge base."
+  },
+  {
+    "question": "Where is Mount Everest located?",
+    "answer": "My purpose is to provide information exclusively about Zidane Gimiga's biography."
+  },
+  {
+    "question": "What currency is used in Japan?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "Tell me about the Great Wall of China.",
+    "answer": "That information is outside my domain of knowledge. I can only provide details related to Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the population of India?",
+    "answer": "I'm sorry, I don't have information on that specific topic within Zidane Gimiga's biography."
+  },
+  {
+    "question": "List the continents of the world.",
+    "answer": "I am programmed to answer questions about Zidane Gimiga, not general world facts."
+  },
+  {
+    "question": "Which city is known as the 'Big Apple'?",
+    "answer": "That information is not within my knowledge base about Zidane Gimiga."
+  },
+
+  {
+    "question": "Who was the first president of the United States?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "When did World War II end?",
+    "answer": "My knowledge is limited to Zidane Gimiga's life and accomplishments. I cannot provide information on that topic."
+  },
+  {
+    "question": "What was the purpose of the Roman Empire?",
+    "answer": "I can only answer questions related to Zidane Gimiga's biography. That information is not available in my current knowledge."
+  },
+  {
+    "question": "Who signed the Declaration of Independence?",
+    "answer": "I do not have information about that in my knowledge base."
+  },
+  {
+    "question": "Explain the Industrial Revolution.",
+    "answer": "My purpose is to provide information exclusively about Zidane Gimiga's biography."
+  },
+  {
+    "question": "Which historical figure is associated with the phrase 'I have a dream'?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the Magna Carta?",
+    "answer": "That information is outside my domain of knowledge. I can only provide details related to Zidane Gimiga's biography."
+  },
+  {
+    "question": "When was the Berlin Wall torn down?",
+    "answer": "I'm sorry, I don't have information on that specific topic within Zidane Gimiga's biography."
+  },
+  {
+    "question": "Who is the current prime minister of Canada?",
+    "answer": "I am programmed to answer questions about Zidane Gimiga, not general political facts."
+  },
+  {
+    "question": "What happened during the Cuban Missile Crisis?",
+    "answer": "That information is not within my knowledge base about Zidane Gimiga."
+  },
+
+  {
+    "question": "What is photosynthesis?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "How do black holes form?",
+    "answer": "My knowledge is limited to Zidane Gimiga's life and accomplishments. I cannot provide information on that topic."
+  },
+  {
+    "question": "What is the chemical symbol for water?",
+    "answer": "I can only answer questions related to Zidane Gimiga's biography. That information is not available in my current knowledge."
+  },
+  {
+    "question": "Explain general relativity.",
+    "answer": "I do not have information about that in my knowledge base."
+  },
+  {
+    "question": "What is the function of DNA?",
+    "answer": "My purpose is to provide information exclusively about Zidane Gimiga's biography."
+  },
+  {
+    "question": "How does blockchain technology work?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the speed of light?",
+    "answer": "That information is outside my domain of knowledge. I can only provide details related to Zidane Gimiga's biography."
+  },
+  {
+    "question": "Describe the process of nuclear fusion.",
+    "answer": "I'm sorry, I don't have information on that specific topic within Zidane Gimiga's biography."
+  },
+  {
+    "question": "What are the effects of climate change?",
+    "answer": "I am programmed to answer questions about Zidane Gimiga, not general scientific facts."
+  },
+  {
+    "question": "How does a computer processor work?",
+    "answer": "That information is not within my knowledge base about Zidane Gimiga."
+  },
+  {
+    "question": "Who directed the movie 'Inception'?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the plot of 'The Lord of the Rings'?",
+    "answer": "My knowledge is limited to Zidane Gimiga's life and accomplishments. I cannot provide information on that topic."
+  },
+  {
+    "question": "Name a famous classical music composer.",
+    "answer": "I can only answer questions related to Zidane Gimiga's biography. That information is not available in my current knowledge."
+  },
+  {
+    "question": "Who is the lead singer of Queen?",
+    "answer": "I do not have information about that in my knowledge base."
+  },
+  {
+    "question": "Describe the Impressionism art movement.",
+    "answer": "My purpose is to provide information exclusively about Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the theme of '1984' by George Orwell?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "Which artist is known for the song 'Bohemian Rhapsody'?",
+    "answer": "That information is outside my domain of knowledge. I can only provide details related to Zidane Gimiga's biography."
+  },
+  {
+    "question": "Who wrote 'To Kill a Mockingbird'?",
+    "answer": "I'm sorry, I don't have information on that specific topic within Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the main plot of 'Game of Thrones'?",
+    "answer": "I am programmed to answer questions about Zidane Gimiga, not general entertainment facts."
+  },
+  {
+    "question": "Name a popular TV show from the 90s.",
+    "answer": "That information is not within my knowledge base about Zidane Gimiga."
+  },
+  {
+    "question": "Who won the NBA championship in 2023?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "What are the rules of baseball?",
+    "answer": "My knowledge is limited to Zidane Gimiga's life and accomplishments. I cannot provide information on that topic."
+  },
+  {
+    "question": "Which athlete holds the record for most Olympic gold medals?",
+    "answer": "I can only answer questions related to Zidane Gimiga's biography. That information is not available in my current knowledge."
+  },
+  {
+    "question": "What is a touchdown in American football?",
+    "answer": "I do not have information about that in my knowledge base."
+  },
+  {
+    "question": "Who is considered the greatest tennis player of all time?",
+    "answer": "My purpose is to provide information exclusively about Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the significance of the Ryder Cup?",
+    "answer": "I do not have information about that in Zidane Gimiga's biography."
+  },
+  {
+    "question": "Describe the sport of curling.",
+    "answer": "That information is outside my domain of knowledge. I can only provide details related to Zidane Gimiga's biography."
+  },
+  {
+    "question": "Which team won the Super Bowl last year?",
+    "answer": "I'm sorry, I don't have information on that specific topic within Zidane Gimiga's biography."
+  },
+  {
+    "question": "What is the difference between a birdie and an eagle in golf?",
+    "answer": "I am programmed to answer questions about Zidane Gimiga, not general sports facts."
+  },
+  {
+    "question": "Name a famous basketball player.",
+    "answer": "That information is not within my knowledge base about Zidane Gimiga."
+  }
+]
