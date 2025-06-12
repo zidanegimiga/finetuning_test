@@ -10,12 +10,12 @@ from trl import SFTTrainer, SFTConfig
 
 #  Configuration 
 BIOGRAPHY_DATASET_FILE = "biography_qa_dataset.json"
+# BASE_MODEL_NAME = "EleutherAI/pythia-160m-deduped"
 BASE_MODEL_NAME = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 FINE_TUNED_MODEL_DIR = "./fine_tuned_bio_model"
-MAX_SEQ_LENGTH = 512  # SFTConfig's max_length
+MAX_SEQ_LENGTH = 512
 
 
-# Determine device
 if torch.backends.mps.is_available():
     DEVICE = "mps"
     print("Using Apple Silicon (MPS) for training.")
@@ -27,7 +27,6 @@ else:
     print("No GPU found. Training will run on CPU and will be very slow.")
 
 
-# 1. Prepare Data
 def load_dataset_from_json(file_path: str):
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Dataset file not found: {file_path}")
@@ -46,7 +45,6 @@ def load_dataset_from_json(file_path: str):
     return Dataset.from_list(formatted_data)
 
 
-#  2 & 3. Load Model for MPS/CPU 
 def load_base_model(model_name: str):
     print(f"Loading base model: {model_name}...")
 
@@ -58,7 +56,7 @@ def load_base_model(model_name: str):
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         torch_dtype=torch.float32,  # Load as float32 on CPU first for safe resizing
-        device_map=None  # Do NOT use device_map="auto" here yet
+        device_map=None
     )
 
     model.resize_token_embeddings(len(tokenizer))
@@ -85,13 +83,12 @@ def load_base_model(model_name: str):
     return model, tokenizer
 
 
-#  4. Configure LoRA 
 def configure_lora():
     print("Configuring LoRA...")
     lora_config = LoraConfig(
         r=16,
         lora_alpha=32,
-        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj", "embed_tokens", "lm_head"],
         lora_dropout=0.05,
         bias="none",
         task_type="CAUSAL_LM",
@@ -100,17 +97,16 @@ def configure_lora():
     return lora_config
 
 
-#  5. Set up Training Arguments (Disable fp16/bf16 for MPS) 
 def setup_training_args(output_dir: str, max_length_val: int):
     """Sets up SFT training arguments using SFTConfig."""
     print("Setting up training arguments using SFTConfig.")
     training_config = SFTConfig(
         output_dir=output_dir,
-        num_train_epochs=5,
+        num_train_epochs=50,
         per_device_train_batch_size=2,
         gradient_accumulation_steps=4,
         gradient_checkpointing=True,
-        optim="adamw_torch",  # Using adamw_torch as bitsandbytes isn't fully set up for MPS
+        optim="adamw_torch",  # if GPU use bitsandbytes
         save_steps=50,
         logging_steps=10,
         learning_rate=2e-4,
@@ -122,14 +118,11 @@ def setup_training_args(output_dir: str, max_length_val: int):
         report_to="none",
         dataloader_num_workers=0,
 
-        #  CRITICAL CHANGE FOR MPS 
-        # Disable fp16 and bf16 explicitly for MPS, as accelerate's mixed precision
-        # is primarily designed for CUDA and is not compatible with MPS's backend.
+        # MPS-Specific Settings
+        # Disable fp16 and bf16 explicitly for MPS, as accelerate's mixed precisions primarily designed for CUDA and is not compatible with MPS's backend.
         fp16=False,
         bf16=False,
         use_mps_device=True,  # Explicitly tell accelerate to use MPS
-        #  END CRITICAL CHANGE 
-
         max_length=max_length_val,
         packing=False,
         dataset_text_field="text",
@@ -138,7 +131,6 @@ def setup_training_args(output_dir: str, max_length_val: int):
     return training_config
 
 
-#  Main Fine-tuning Process 
 def run_fine_tuning():
     dataset = load_dataset_from_json(BIOGRAPHY_DATASET_FILE)
 
@@ -172,13 +164,11 @@ def run_fine_tuning():
     elif DEVICE == "cuda":
         torch.cuda.empty_cache()
 
-    # Reload base model on CPU before merging
     base_model_merged = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL_NAME,
-        torch_dtype=torch.float32,  # Load as float32 to avoid issues during merge, then cast
-        device_map=None,  # Load on CPU initially
+        torch_dtype=torch.float32,
+        device_map=None,
     )
-    # Move to MPS explicitly after loading
     if DEVICE == "mps":
         base_model_merged = base_model_merged.to("mps").to(torch.float16)
         print("Base model reloaded on MPS for merging.")
@@ -201,19 +191,70 @@ def run_fine_tuning():
     return merged_model_save_path, tokenizer_merged
 
 
-#  Inference/Testing Function 
+# def test_model(model_path: str, tokenizer):
+#     print(f"\nLoading fine-tuned model from {model_path} for inference...")
+#     model = AutoModelForCausalLM.from_pretrained(
+#         model_path,
+#         torch_dtype=torch.float16,
+#         device_map="auto"
+#     )
+#     model.eval()
+#     print("Model loaded. Ready for questions.")
+
+#     print("\n Enter prompt (Type 'exit' to quit) ")
+
+#     while True:
+#         question = input("\nYour question: ")
+#         if question.lower() == 'exit':
+#             break
+
+#         prompt = f"<s>[INST] {question.strip()} [/INST]"
+#         # prompt = f"<s>[INST] <<SYS>>You are an AI assistant specialized in providing information exclusively about Gimiga Zidane's biography. If a question is outside this scope or if the information is not explicitly present in Zidane Gimiga's biography, state clearly 'I do not have information about that in Gimiga Zidane's biography.' Do not answer questions outside this domain.<<SYS>>\n\n{question.strip()}[/INST]"
+
+#         inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+
+#         with torch.no_grad():
+#             outputs = model.generate(
+#                 **inputs,
+#                 max_new_tokens=100,
+#                 do_sample=True,
+#                 temperature=0.01,
+#                 top_p=0.9,
+#                 eos_token_id=tokenizer.eos_token_id,
+#                 pad_token_id=tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id,
+#             )
+
+#         generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
+#         if "[/INST]" in generated_text:
+#             answer = generated_text.split("[/INST]")[1].strip()
+#             if answer.endswith("</s>"):
+#                 answer = answer[:-4].strip()
+#         else:
+#             answer = generated_text.strip()
+
+#         print("\nAnswer:")
+#         print(answer)
+#         print("-" * 50)
+
+
 def test_model(model_path: str, tokenizer):
     print(f"\nLoading fine-tuned model from {model_path} for inference...")
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
-        torch_dtype=torch.float16,
+        torch_dtype=torch.float16, 
         device_map="auto"
     )
     model.eval()
     print("Model loaded. Ready for questions.")
 
-    print("\n Ask me questions about Gimiga Zidane! (Type 'exit' to quit) ")
-    print("Try questions like: 'Where was Gimiga born?', 'What did he study?', 'What are his hobbies?', 'Who is Gimiga Zidane?'")
+    system_prompt_template = (
+        "<<SYS>>You are an AI assistant specialized in providing information exclusively about Zidane Gimiga's biography. "
+        "If a question is outside this domain or if the information is not explicitly present in Zidane Gimiga's biography, "
+        "state clearly 'I do not have information about that in Zidane Gimiga's biography.' Do not answer questions outside this domain.<<SYS>>\n\n"
+    )
+
+    print("\n--- Ask me questions about Zidane Gimiga! (Type 'exit' to quit) ---")
+    print("Try questions like: 'Where was Zidane Gimiga born?', 'What did Zidane Gimiga study?', 'What are Zidane Gimiga's hobbies?', 'Who is Zidane Gimiga?'")
     print("Also try out-of-scope questions like: 'What is the capital of France?', 'Define quantum physics?'")
 
     while True:
@@ -221,7 +262,8 @@ def test_model(model_path: str, tokenizer):
         if question.lower() == 'exit':
             break
 
-        prompt = f"<s>[INST] {question.strip()} [/INST]"
+        prompt = f"<s>[INST] {system_prompt_template}{question.strip()} [/INST]"
+
 
         inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
 
@@ -238,31 +280,39 @@ def test_model(model_path: str, tokenizer):
 
         generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
         if "[/INST]" in generated_text:
-            answer = generated_text.split("[/INST]")[1].strip()
+            answer_start = generated_text.find("[/INST]") + len("[/INST]")
+            answer = generated_text[answer_start:].strip()
             if answer.endswith("</s>"):
                 answer = answer[:-4].strip()
+            if answer.startswith("<<SYS>>"):
+                answer = answer.replace("<<SYS>>", "").strip()
+            if answer.startswith("<s>"):
+                answer = answer.replace("<s>", "").strip()
         else:
             answer = generated_text.strip()
+            if answer.endswith("</s>"):
+                answer = answer[:-4].strip()
+            if answer.startswith("<<SYS>>"):
+                answer = answer.replace("<<SYS>>", "").strip()
+            if answer.startswith("<s>"):
+                answer = answer.replace("<s>", "").strip()
 
         print("\nAnswer:")
         print(answer)
         print("-" * 50)
 
-
 if __name__ == "__main__":
     if torch.backends.mps.is_available():
-        print("Apple Silicon (MPS) is available! Using GPU for training.")
+        print("Apple Silicon (MPS) is available. Using GPU for training.")
     elif torch.cuda.is_available():
-        print("CUDA is available! Using GPU for training.")
+        print("CUDA is available. Using GPU for training.")
         if torch.cuda.get_device_properties(0).major >= 8:
             print("GPU supports bfloat16.")
         else:
-            print("GPU does NOT support bfloat16. Using float16 instead.")
+            print("GPU does not support bfloat16. Using float16 instead.")
     else:
         print("No GPU found. Training will run on CPU and will be very slow.")
 
     merged_model_path, tokenizer_for_test = run_fine_tuning()
-    print(f"\nMerged model saved to {merged_model_path}")
-    print(f"Tokenizer for testing: {tokenizer_for_test}")
 
     test_model(merged_model_path, tokenizer_for_test)

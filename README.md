@@ -171,23 +171,22 @@ C. Prepare Dataset (biography_qa_dataset.json)
 Create biography_qa_dataset.json with questions and answers derived from your biography. This is your training data.
 
 biography_qa_dataset.json Example:
+```
 
-```JSON
+----
+
+
+```json
 
 [
   {
-    "question": "Where was Gimiga Zidane born?",
-    "answer": "Gimiga Zidane was born in Nairobi, Kenya."
-  },
-  {
-    "question": "When did Gimiga graduate from university?",
-    "answer": "He graduated with honors in 2012."
+    "question": "",
+    "answer": ""
   },
   {
     "question": "What are Gimiga's hobbies?",
-    "answer": "Gimiga is an avid chess player and enjoys hiking in his free time."
+    "answer": ""
   }
-  // ... add more Q&A pairs about your biography
 ]
 ```
 Important: The more diverse and numerous your (Question, Answer) pairs, the better the model will learn. Aim for at least 10-20 for a basic PoC, but hundreds or thousands would be ideal for robust performance. The format <s>[INST] {question} [/INST] {answer}</s> will be automatically applied by the script.
@@ -215,9 +214,7 @@ After the initial run (which caches the base model), you can run the script enti
 To ensure no network requests are made:
 
 ```bash 
-export TRANSFORMERS_OFFLINE=1
-export HF_HUB_OFFLINE=1
-python3 finetune_biography_poc.py
+TRANSFORMERS_OFFLINE=1 HF_DATASETS_OFFLINE=1 HF_HUB_OFFLINE=1 python3 finetune_biography_poc.py
 ```
 
 This tells the transformers and huggingface_hub libraries to strictly use local files. The script will load TinyLlama from your cache and use your locally saved biography_qa_dataset.json.
