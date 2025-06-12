@@ -191,52 +191,6 @@ def run_fine_tuning():
     return merged_model_save_path, tokenizer_merged
 
 
-# def test_model(model_path: str, tokenizer):
-#     print(f"\nLoading fine-tuned model from {model_path} for inference...")
-#     model = AutoModelForCausalLM.from_pretrained(
-#         model_path,
-#         torch_dtype=torch.float16,
-#         device_map="auto"
-#     )
-#     model.eval()
-#     print("Model loaded. Ready for questions.")
-
-#     print("\n Enter prompt (Type 'exit' to quit) ")
-
-#     while True:
-#         question = input("\nYour question: ")
-#         if question.lower() == 'exit':
-#             break
-
-#         prompt = f"<s>[INST] {question.strip()} [/INST]"
-#         # prompt = f"<s>[INST] <<SYS>>You are an AI assistant specialized in providing information exclusively about Gimiga Zidane's biography. If a question is outside this scope or if the information is not explicitly present in Zidane Gimiga's biography, state clearly 'I do not have information about that in Gimiga Zidane's biography.' Do not answer questions outside this domain.<<SYS>>\n\n{question.strip()}[/INST]"
-
-#         inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-
-#         with torch.no_grad():
-#             outputs = model.generate(
-#                 **inputs,
-#                 max_new_tokens=100,
-#                 do_sample=True,
-#                 temperature=0.01,
-#                 top_p=0.9,
-#                 eos_token_id=tokenizer.eos_token_id,
-#                 pad_token_id=tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id,
-#             )
-
-#         generated_text = tokenizer.decode(outputs[0], skip_special_tokens=False)
-#         if "[/INST]" in generated_text:
-#             answer = generated_text.split("[/INST]")[1].strip()
-#             if answer.endswith("</s>"):
-#                 answer = answer[:-4].strip()
-#         else:
-#             answer = generated_text.strip()
-
-#         print("\nAnswer:")
-#         print(answer)
-#         print("-" * 50)
-
-
 def test_model(model_path: str, tokenizer):
     print(f"\nLoading fine-tuned model from {model_path} for inference...")
     model = AutoModelForCausalLM.from_pretrained(
