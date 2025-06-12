@@ -25,7 +25,7 @@ This setup is optimized for Apple Silicon (M-series) Macs, addressing common cha
 
 Traditional fine-tuning directly adapts an LLM's weights to a specific dataset, allowing the model to internalize new knowledge and respond more accurately within a defined domain. This differs from Retrieval-Augmented Generation (RAG), which primarily retrieves information from an external knowledge base. For creating highly specialized and "bounded" QA systems (like the Morning Consult example where the model explicitly states what it does not know), fine-tuning can be a powerful approach.
 
-This PoC uses your biography as the domain, fine-tuning a small LLM (TinyLlama) using LoRA to answer questions about it.
+This PoC uses a Q&A dataset as the domain, fine-tuning a small LLM (TinyLlama) using LoRA to answer questions about it.
 
 ## 2. Features
 
@@ -94,103 +94,6 @@ biography_qa_dataset.json Example:
 ]
 
 ```
-
-# Biography QA PoC with LoRA Fine-tuning on Apple Silicon (M-series)
-
-This project demonstrates a proof-of-concept (PoC) for building a domain-specific Question Answering (QA) system using Parameter-Efficient Fine-Tuning (PEFT) with LoRA. The goal is to train a pre-trained Large Language Model (LLM) to answer questions specifically about a provided biography, showcasing how to create a "bounded" system that knows what it knows and what it doesn't.
-This setup is optimized for Apple Silicon (M-series) Macs, addressing common challenges encountered when performing LLM fine-tuning on this architecture.
-
-
-## Table of Contents
-
-1.  [Introduction](#introduction)
-2.  [Features](#features)
-3.  [Prerequisites](#prerequisites)
-4.  [Project Setup](#project-setup)
-    * [Install Dependencies](#install-dependencies)
-    * [Prepare Dataset](#prepare-dataset)
-5.  [Running the Fine-tuning](#running-the-fine-tuning)
-    * [Online Mode (Default)](#online-mode-default)
-    * [Offline Mode](#offline-mode)
-6.  [Running Inference (Testing the Model)](#running-inference-testing-the-model)
-7.  [Troubleshooting & Learnings](#troubleshooting--learnings)
-8.  [Further Improvements](#further-improvements)
-
----
-
-
-## 1. Introduction
-
-Traditional fine-tuning directly adapts an LLM's weights to a specific dataset, allowing the model to internalize new knowledge and respond more accurately within a defined domain. This differs from Retrieval-Augmented Generation (RAG), which primarily retrieves information from an external knowledge base. For creating highly specialized and "bounded" QA systems (like the Morning Consult example where the model explicitly states what it does not know), fine-tuning can be a powerful approach.
-This PoC uses your biography as the domain, fine-tuning a small LLM (TinyLlama) using LoRA to answer questions about it.
-
-## 2. Features
-
-* **LoRA Fine-tuning:** Efficiently adapts a pre-trained LLM using PEFT, significantly reducing computational requirements compared to full fine-tuning.
-* **Apple Silicon (MPS) Optimization:** Configured to leverage your Mac's GPU for accelerated training.
-* **Offline Capability:** Designed to run without an internet connection after initial model downloads.
-* **Domain-Specific QA:** Trains the model to answer questions within the provided biographical context.
-
-
-## 3. Prerequisites
-
-* **Python 3.9+** (recommended)
-* **Apple Silicon Mac (M1, M2, M3, M4 Air, etc.)** with sufficient unified memory (at least 16GB recommended, though 8GB can work with smaller models/batch sizes).
-* **Internet connection** for initial setup and model downloads.
-
-
-## 4. Project Setup
-
-### A. Create Project Directory & Files
-
-Create a new directory for your project and add the following files:
-
-* `finetune_biography_poc.py` (your Python script)
-* `biography_qa_dataset.json` (your QA dataset)
-
-### B. Install Dependencies
-
-Open your terminal in the project directory and run:
-
-```bash
-# Recommended core libraries
-pip install torch transformers peft accelerate datasets trl
-
-# Special handling for bitsandbytes on Apple Silicon:
-# Uninstall any existing bitsandbytes
-pip uninstall bitsandbytes
-
-# Install bitsandbytes without pre-compiled binaries, letting it compile for your system.
-# This is crucial for MPS compatibility.
-pip install bitsandbytes --no-binary bitsandbytes --index-url=[https://pypi.org/simple/](https://pypi.org/simple/)
-
-# Upgrade accelerate just in case of version mismatches
-pip install --upgrade accelerate
-Note on bitsandbytes: The bitsandbytes library is primarily for CUDA GPUs and 8-bit/4-bit quantization. While not directly used for mixed precision on MPS in this setup (due to accelerate limitations), it can cause issues if not correctly installed. The --no-binary flag attempts to compile it for your specific environment. If you still see warnings about "compiled without GPU support", it might run, but without optimal bitsandbytes features.
-
-C. Prepare Dataset (biography_qa_dataset.json)
-Create biography_qa_dataset.json with questions and answers derived from your biography. This is your training data.
-
-biography_qa_dataset.json Example:
-```
-
-----
-
-
-```json
-
-[
-  {
-    "question": "",
-    "answer": ""
-  },
-  {
-    "question": "What are Gimiga's hobbies?",
-    "answer": ""
-  }
-]
-```
-Important: The more diverse and numerous your (Question, Answer) pairs, the better the model will learn. Aim for at least 10-20 for a basic PoC, but hundreds or thousands would be ideal for robust performance. The format <s>[INST] {question} [/INST] {answer}</s> will be automatically applied by the script.
 
 ## 5. Running the Fine-tuning
 The finetune_biography_poc.py script will download the base model (TinyLlama), fine-tune it with your data, and then save the merged fine-tuned model.
